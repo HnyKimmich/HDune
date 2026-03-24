@@ -1,0 +1,159 @@
+[
+  {
+  "name":"蒸馏服",
+  "allowed_action_space":"Freman",
+  "effect":[
+  {
+    "type":"gain influence",
+    "name":"Freman",
+    "amount":"1"
+  },
+  {
+    "type":"resource",
+    "resource":[
+    {
+      "name":"water",
+      "amount":"1"
+    }]
+  }],
+  "cost":[]
+},
+{
+  "name":"坚强战士",
+  "allowed_action_space":"Freman",
+  "effect":[
+  {
+    "type":"gain influence",
+    "name":"Freman",
+    "amount":"1"
+  },
+  {
+    "type":"resource",
+    "resource":[
+    {
+      "name":"army",
+      "amount":"1"
+    }]
+  }],
+  "cost":[{
+    "name": "water",
+    "amount": "1"
+  }]
+},
+{
+  "name":"秘密",
+  "allowed_action_space":"Bene Gesserite",
+  "effect":[
+  {
+    "type":"gain influence",
+    "name":"Bene Gesserite",
+    "amount":"1"
+  },
+  {
+    "type":"secret"
+  }],
+  "cost":[]
+},
+{
+  "name":"育种计划",
+  "allowed_action_space":"Bene Gesserite",
+  "effect":[
+  {
+    "type":"gain influence",
+    "name":"Bene Gesserite",
+    "amount":"1"
+  },
+  {
+    "type":"delete and draw"
+  }],
+  "cost":[{
+    "name": "spice",
+    "amount": "2"
+  }]
+},
+{
+  "name":"折叠空间",
+  "allowed_action_space":"Space Guild",
+  "effect":[
+  {
+    "type":"gain influence",
+    "name":"Space Guild",
+    "amount":"1"
+  },
+  {
+    "type":"foldspace"
+  }],
+  "cost":[]
+},
+{
+  "name":"远航机",
+  "allowed_action_space":"Space Guild",
+  "effect":[
+  {
+    "type":"gain influence",
+    "name":"Space Guild",
+    "amount":"1"
+  },
+  {
+    "type":"resource",
+    "resource":[{
+      "name":"army",
+      "amount":"5"
+    },
+    {
+      "name":"water",
+      "amount":"2"
+    }]
+  }],
+  "cost":[{
+    "name": "spice",
+    "amount": "6"
+  }]
+},
+{
+  "name":"皇帝",
+  "allowed_action_space":"Emperor",
+  "effect":[
+  {
+    "type":"gain influence",
+    "name":"Emperor",
+    "amount":"1"
+  },
+  {
+    "type":"resource",
+    "resource":[{
+      "name":"solari",
+      "amount":"2"
+    }]
+  }],
+  "cost":[]
+},
+{
+  "name":"密谋",
+  "allowed_action_space":"Emperor",
+  "effect":[
+  {
+    "type":"gain influence",
+    "name":"Emperor",
+    "amount":"1"
+  },
+  {
+    "type":"resource",
+    "resource":[{
+      "name":"army",
+      "amount":"2"
+    },
+    {
+      "name":"salori",
+      "amount":"5"
+    }]
+  },
+  {
+    "type":"secret"
+  }],
+  "cost":[{
+    "name": "spice",
+    "amount": "4"
+  }]
+}
+]

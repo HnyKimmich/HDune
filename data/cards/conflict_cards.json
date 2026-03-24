@@ -1,0 +1,17 @@
+[
+    {
+        "name": "香料冲突",
+        "rewards": [
+            {"rank": 1, "resource": "spice", "amount": 5},
+            {"rank": 2, "resource": "spice", "amount": 3},
+            {"rank": 3, "resource": "spice", "amount": 1}
+        ]
+    },
+    {
+        "name": "水之争",
+        "rewards": [
+            {"rank": 1, "resource": "water", "amount": 3},
+            {"rank": 2, "resource": "water", "amount": 1}
+        ]
+    }
+]

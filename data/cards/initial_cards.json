@@ -1,0 +1,86 @@
+[
+    {
+        "id": "",
+        "name": "实验",
+        "type": "None",
+        "allowed_action_spaces": ["yellow"],
+        "play_effects": [{
+            "type": "experiment"
+        }],
+        "show_effects": [{
+            "type": "evidence",
+            "amount": "1"
+        },
+        {
+            "type": "gene",
+            "amount": "1"
+        }]
+    },
+    {
+        "id": "",
+        "type": "None",
+        "name": "侦察",
+        "allowed_action_spaces": ["purple"],
+        "play_effects": [], 
+        "show_effects": [{
+            "type": "evidence",
+            "amount": "1"
+        }]
+    },
+    {
+        "id": "",
+        "type": "None",
+        "name": "外交",
+        "allowed_action_spaces": ["Freman", "Bene Gesserite", "Space Guild", "Emperor"],
+        "play_effects": [], 
+        "show_effects": [{
+            "type": "evidence",
+            "amount": "1"
+        }]
+    },
+    {
+        "id": "",
+        "type": "None",
+        "name": "寻求盟友",
+        "allowed_action_spaces": ["Freman", "Bene Gesserite", "Space Guild", "Emperor"],
+        "play_effects": [{
+            "type":"delete itself"
+        }], 
+        "show_effects": []
+    },
+    {
+        "id": "",
+        "type": "None",
+        "name": "说服",
+        "allowed_action_spaces": [],
+        "play_effects": [], 
+        "show_effects": [{
+            "type": "evidence",
+            "amount": "2"
+        }]
+    },
+    {
+        "id": "",
+        "type": "None",
+        "name": "印章戒指",
+        "allowed_action_spaces": ["yellow", "purple", "green"],
+        "play_effects": [{
+            "type": "leader"
+        }], 
+        "show_effects": [{
+            "type": "evidence",
+            "amount": "2"
+        }]
+    },
+    {
+        "id": "",
+        "type": "None",
+        "name": "匕首",
+        "allowed_action_spaces": ["green"],
+        "play_effects": [], 
+        "show_effects": [{
+            "type": "knife",
+            "amount": "1"
+        }]
+    }
+]
