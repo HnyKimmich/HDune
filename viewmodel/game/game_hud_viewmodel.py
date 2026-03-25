@@ -57,8 +57,10 @@ class GameHUDViewModel(Observable):
             self._notify('conflict_card_name', None, self._conflict_card_name)
 
     # 暴露给 UI 的命令
-    def show_card(self, player_id: int):
-        return self.turn_controller.action_phase_player_show(player_id)
+    def show_card(self):
+        """当前玩家执行展示"""
+        return self.turn_controller.action_phase_player_show()
 
-    def play_card(self, player_id: int, card):
-        return self.turn_controller.action_phase_player_play(player_id, card)
+    def play_card(self, card, target_region_name: str = None):
+        """当前玩家打出卡牌"""
+        return self.turn_controller.action_phase_player_play(card, target_region_name)

@@ -76,7 +76,7 @@ class Bootstrapper:
         players = []
         for i in range(4):
             deck = DeckController(initial_deck.copy())
-            player = Player(i, f"玩家{i+1}", deck)
+            player = Player(i, f"玩家{i}", deck)
             player.resources = {'water': 1, 'spice': 0, 'solari': 0, 'army': 3}
             players.append(player)
 
@@ -115,7 +115,7 @@ class Bootstrapper:
         map_view = MapView(map_vm)
         hand_view = HandView(hand_vms)
         player_panels = [PlayerInfoPanel(vm) for vm in player_info_vms]
-        game_hud = GameHUD(hud_vm, 1)
+        game_hud = GameHUD(hud_vm)  # 不再传递 player_id
 
         # 将全局引用绑定（用于拖拽）
         global _current_player, _current_card_vm
