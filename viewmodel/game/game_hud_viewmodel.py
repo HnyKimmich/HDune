@@ -1,22 +1,24 @@
 # viewmodel/game/game_hud_viewmodel.py
 from common.observable import Observable
+from common.event_bus import EventBus, EVENT_PHASE_CHANGED, EVENT_CURRENT_PLAYER_CHANGED, EVENT_ACTION_PHASE_ENDED
 from model.game.turn_controller import TurnController, GamePhase
 from model.game.conflict_controller import ConflictController
 
 class GameHUDViewModel(Observable):
-    def __init__(self, turn_controller: TurnController, conflict_controller: ConflictController):
+    def __init__(self, turn_controller: TurnController, conflict_controller: ConflictController, event_bus: EventBus):
         super().__init__()
         self.turn_controller = turn_controller
         self.conflict_controller = conflict_controller
+        self._event_bus = event_bus
         self._current_phase = turn_controller.phase
         self._current_player_index = turn_controller.current_action_player_index
         self._current_player_name = turn_controller.player_manager.players[self._current_player_index].name
         self._conflict_card_name = None
 
-        # 注册 TurnController 回调
-        turn_controller.register_phase_changed(self._on_phase_changed)
-        turn_controller.register_current_player_changed(self._on_current_player_changed)
-        turn_controller.register_action_phase_ended(self._on_action_phase_ended)
+        # 订阅事件
+        event_bus.subscribe(EVENT_PHASE_CHANGED, self._on_phase_changed)
+        event_bus.subscribe(EVENT_CURRENT_PLAYER_CHANGED, self._on_current_player_changed)
+        event_bus.subscribe(EVENT_ACTION_PHASE_ENDED, self._on_action_phase_ended)
 
         if self.conflict_controller.current_conflict:
             self._conflict_card_name = self.conflict_controller.current_conflict.name
@@ -31,8 +33,8 @@ class GameHUDViewModel(Observable):
         self._current_player_name = player_name
         self._notify('current_player_name', None, player_name)
 
-    def _on_action_phase_ended(self):
-        # 可做额外处理，比如更新界面按钮状态
+    def _on_action_phase_ended(self, _=None):
+        # 可做额外处理
         pass
 
     @property

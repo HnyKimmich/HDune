@@ -30,9 +30,8 @@ class MapViewModel(Observable):
 
     def _on_card_dropped(self, param, region):
         card_vm, player = param
-        success, msg = self._turn_controller.action_phase_player_play(
-            player.id, card_vm._card, region.name
-        )
+        # 注意：当前玩家由 turn_controller 内部维护，只需传入卡牌和目标区域
+        success, msg = self._turn_controller.action_phase_player_play(card_vm._card, region.name)
         # 可在此将消息发送到侧边栏
         return success, msg
 

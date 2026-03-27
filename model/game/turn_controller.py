@@ -1,5 +1,6 @@
 from enum import Enum
 from typing import List, Optional, Callable
+from common.event_bus import EventBus, EVENT_CURRENT_PLAYER_CHANGED, EVENT_PHASE_CHANGED, EVENT_ACTION_PHASE_ENDED
 from ..player.player import Player
 from ..player.player_manager import PlayerManager
 from .conflict_controller import ConflictController
@@ -13,7 +14,7 @@ class GamePhase(Enum):
 
 class TurnController:
     def __init__(self, player_manager: PlayerManager, conflict_controller: ConflictController,
-                 game_rule_service: GameRuleService, map_controller):
+                 game_rule_service: GameRuleService, map_controller, event_bus: EventBus):
         self.player_manager = player_manager
         self.conflict_controller = conflict_controller
         self.rule_service = game_rule_service
@@ -21,30 +22,16 @@ class TurnController:
         self.phase = GamePhase.PREPARE
         self.round = 1
         self.current_action_player_index = 0
-        self._phase_changed_callbacks: List[Callable[[GamePhase], None]] = []
-        self._current_player_changed_callbacks: List[Callable[[int], None]] = []
-        self._action_phase_ended_callbacks: List[Callable[[], None]] = []
-
-    def register_phase_changed(self, callback: Callable[[GamePhase], None]):
-        self._phase_changed_callbacks.append(callback)
-
-    def register_current_player_changed(self, callback: Callable[[int], None]):
-        self._current_player_changed_callbacks.append(callback)
-
-    def register_action_phase_ended(self, callback: Callable[[], None]):
-        self._action_phase_ended_callbacks.append(callback)
+        self._event_bus = event_bus
 
     def _notify_phase_changed(self):
-        for cb in self._phase_changed_callbacks:
-            cb(self.phase)
+        self._event_bus.publish(EVENT_PHASE_CHANGED, self.phase)
 
     def _notify_current_player_changed(self):
-        for cb in self._current_player_changed_callbacks:
-            cb(self.current_action_player_index)
+        self._event_bus.publish(EVENT_CURRENT_PLAYER_CHANGED, self.current_action_player_index)
 
     def _notify_action_phase_ended(self):
-        for cb in self._action_phase_ended_callbacks:
-            cb()
+        self._event_bus.publish(EVENT_ACTION_PHASE_ENDED)
 
     def start_round(self):
         self.phase = GamePhase.PREPARE

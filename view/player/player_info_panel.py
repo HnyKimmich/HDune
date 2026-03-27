@@ -1,5 +1,6 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton
 from viewmodel.player.player_info_viewmodel import PlayerInfoViewModel
+
 
 class PlayerInfoPanel(QWidget):
     def __init__(self, viewmodel: PlayerInfoViewModel, parent=None):
@@ -19,6 +20,12 @@ class PlayerInfoPanel(QWidget):
         layout.addWidget(self.resources_label)
         layout.addWidget(self.envoy_label)
 
+        # 添加查看手牌的按钮
+        self.show_hand_btn = QPushButton("查看手牌")
+        self.show_hand_btn.clicked.connect(self._vm.show_hand_command.execute)
+        layout.addWidget(self.show_hand_btn)
+
+        # 监听资源变化
         self._vm.on_property_changed('resources', self._on_resources_changed)
         self._vm.on_property_changed('envoy_count', self._on_envoy_changed)
 

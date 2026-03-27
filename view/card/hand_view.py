@@ -1,24 +1,36 @@
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QPushButton
+from PyQt5.QtWidgets import QWidget, QHBoxLayout
+from viewmodel.card.hand_viewmodel import HandViewModel
+from viewmodel.card.card_viewmodel import CardViewModel
 from .card_view import CardView
 
+
 class HandView(QWidget):
-    def __init__(self, hand_viewmodels: list, parent=None):
+    """手牌视图，绑定 HandViewModel"""
+    def __init__(self, viewmodel: HandViewModel, parent=None):
         super().__init__(parent)
+        self._vm = viewmodel
         self.layout = QHBoxLayout()
         self.setLayout(self.layout)
         self._card_views = []
-        self.update_hand(hand_viewmodels)
 
-    def update_hand(self, new_viewmodels):
+        # 监听手牌变化
+        self._vm.on_property_changed('hand_cards', self._on_hand_cards_changed)
+        self._refresh_cards()
+
+    def _refresh_cards(self):
+        """根据 ViewModel 的 hand_cards 刷新视图"""
+        # 清除现有卡片
         for cv in self._card_views:
             cv.deleteLater()
         self._card_views.clear()
-        for vm in new_viewmodels:
-            card_view = CardView(vm)
+
+        # 创建新卡片
+        for card in self._vm.hand_cards:
+            # 创建 CardViewModel 实例
+            card_vm = CardViewModel(card)   # CardViewModel 接收 Card 对象
+            card_view = CardView(card_vm)   # CardView 接收 CardViewModel
             self.layout.addWidget(card_view)
             self._card_views.append(card_view)
 
-    def _on_show(self):
-        # 通知 ViewModel 展示所有手牌
-        # 需要连接到外部的信号或通过事件总线
-        pass
+    def _on_hand_cards_changed(self, old, new):
+        self._refresh_cards()
